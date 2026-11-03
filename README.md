@@ -1,6 +1,6 @@
 # FileKit SEO site
 
-1. Replace `https://yourdomain.com` and `hello@yourdomain.com` in every file (use your editor's find and replace across the folder).
+1. Replace `https://filekitonline.com` and `hello@yourdomain.com` in every file (use your editor's find and replace across the folder).
 2. Upload this folder to Vercel (drag and drop or `vercel deploy`) and connect your domain.
 3. In Google Search Console add your domain and submit `/sitemap.xml`.
 4. Add a 1200x630 image and an `og:image` tag if you want rich link previews.

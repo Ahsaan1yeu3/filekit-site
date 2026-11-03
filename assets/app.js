@@ -30,7 +30,7 @@ const IC={
   arrow:'<path d="M5 12h14M13 6l6 6-6 6"/>'
 };
 const ico=k=>`<svg class="svg" viewBox="0 0 24 24" aria-hidden="true">${IC[k]}</svg>`;
-try{ pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js'; }catch(e){}
+try{ pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.worker.min.js'; }catch(e){}
 
 /* ---------- toast + saving ---------- */
 let toastT;
@@ -165,11 +165,11 @@ async function pdfToDocx(file,out){
         kids.push(new docx.Paragraph({pageBreakBefore:p>1&&i===0,bidirectional:rtl,spacing:{after:140},children:[new docx.TextRun({text:t,rightToLeft:rtl})]})); });
     }else{
       scanned++;
-      const vp=page.getViewport({scale:1.6}), c=document.createElement('canvas'); c.width=vp.width; c.height=vp.height;
+      const vp=page.getViewport({scale:1.4}), c=document.createElement('canvas'); c.width=vp.width; c.height=vp.height;
       await page.render({canvasContext:c.getContext('2d'),viewport:vp}).promise;
-      const blob=await new Promise(r=>c.toBlob(r,'image/jpeg',0.85));
+      const blob=await new Promise(r=>c.toBlob(r,'image/png'));
       const data=new Uint8Array(await blob.arrayBuffer()); const sc=Math.min(1,600/vp.width);
-      kids.push(new docx.Paragraph({pageBreakBefore:p>1,children:[new docx.ImageRun({data,type:'jpg',transformation:{width:Math.round(vp.width*sc),height:Math.round(vp.height*sc)}})]}));
+      kids.push(new docx.Paragraph({pageBreakBefore:p>1,children:[new docx.ImageRun({data,type:'png',transformation:{width:Math.round(vp.width*sc),height:Math.round(vp.height*sc)}})]}));
     }
   }
   progress(out,'Saving the Word file…');
