@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://filekitonline.com/sitemap.xml
